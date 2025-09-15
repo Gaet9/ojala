@@ -1,0 +1,91 @@
+import AnimatedCounter from './AnimatedCounter';
+import { TrendingUp, Users, Star } from 'lucide-react';
+
+const StatsSection = () => {
+  const stats = [
+    {
+      icon: TrendingUp,
+      label: "Copies Sold",
+      value: 15420,
+      suffix: "+",
+      color: "text-emerald-500"
+    },
+    {
+      icon: Star,
+      label: "Average Rating",
+      value: 4.8,
+      decimals: 1,
+      suffix: "/5",
+      color: "text-amber-500"
+    },
+    {
+      icon: Users,
+      label: "Reviews",
+      value: 2847,
+      suffix: "+",
+      color: "text-blue-500"
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-gradient-subtle">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+            Trusted by Readers Worldwide
+          </h2>
+          <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
+            Join thousands of professionals who have transformed their thinking with these proven insights
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {stats.map((stat, index) => (
+            <div 
+              key={index}
+              className="text-center bg-card rounded-3xl p-8 shadow-card hover:shadow-elegant transition-all duration-500 group"
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <stat.icon className="w-8 h-8 text-primary-foreground" />
+              </div>
+              
+              <div className="mb-4">
+                <AnimatedCounter 
+                  end={stat.value}
+                  decimals={stat.decimals || 0}
+                  suffix={stat.suffix || ""}
+                  duration={2500}
+                />
+              </div>
+              
+              <p className="text-lg font-semibold text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-16">
+          <div className="inline-flex items-center gap-4 bg-accent/50 rounded-full px-6 py-3 backdrop-blur-sm">
+            <div className="flex -space-x-2">
+              {[...Array(4)].map((_, i) => (
+                <div 
+                  key={i} 
+                  className="w-8 h-8 bg-gradient-primary rounded-full border-2 border-background flex items-center justify-center text-xs font-bold text-primary-foreground"
+                >
+                  {String.fromCharCode(65 + i)}
+                </div>
+              ))}
+            </div>
+            <span className="text-sm font-medium text-muted-foreground">
+              Real readers, real impact
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default StatsSection;
