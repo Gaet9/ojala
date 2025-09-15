@@ -57,7 +57,7 @@ const GallerySection = () => {
           {galleryItems.map((item, index) => (
             <div 
               key={index}
-              className="gallery-item fade-in"
+              className="group gallery-item fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => openLightbox(index)}
             >
