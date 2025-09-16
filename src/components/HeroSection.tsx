@@ -1,5 +1,5 @@
 import { ExternalLink, Star } from "lucide-react";
-import bookCover from "../../../Couverture2.jpg";
+import bookCover from "../assets/Photos/Couverture2.jpg";
 
 const HeroSection = () => {
     return (
