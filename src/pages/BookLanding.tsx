@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
+import ItinerarySection from "@/components/ItinerarySection";
 import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
 
@@ -31,6 +32,7 @@ const BookLanding = () => {
         <div className='min-h-screen bg-background w-full'>
             <HeroSection />
             <StatsSection />
+            <ItinerarySection />
             <GallerySection />
             <Footer />
         </div>

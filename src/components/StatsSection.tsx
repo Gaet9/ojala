@@ -28,12 +28,12 @@ const StatsSection = () => {
     ];
 
     return (
-        <section className='py-24 bg-gradient-subtle'>
+        <section className='py-24'>
             <div className='w-full max-w-7xl mx-auto'>
                 <div className='px-6'>
                     <div className='text-center mb-16'>
                         <h2 className='text-3xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent'>
-                            Approuvé par des lecteurs
+                            Approuvé par les lecteurs
                         </h2>
                         <p className='text-xl text-muted-foreground font-medium max-w-2xl mx-auto'>
                             Rejoignez les lecteurs passionés de voyage et d'aventure.

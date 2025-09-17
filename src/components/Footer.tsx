@@ -9,7 +9,7 @@ const Footer = () => {
     ];
 
     return (
-        <footer className='bg-gradient-subtle border-t border-border/50'>
+        <footer className='bg-gradient-subtle'>
             <div className='w-full max-w-7xl mx-auto'>
                 <div className='px-6 py-16'>
                     <div className='text-center'>
@@ -26,9 +26,9 @@ const Footer = () => {
                                 href='https://amzn.eu/d/its4qzt'
                                 target='_blank'
                                 rel='noopener noreferrer'
-                                className='btn-secondary inline-flex items-center group'>
-                                <span>Obtenez votre exemplaire maintenant</span>
-                                <ExternalLink className='w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300' />
+                                className='btn-primary inline-flex items-center text-lg group'>
+                                <span>Obtenez votre exemplaire</span>
+                                <ExternalLink className='w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300' />
                             </a>
                         </div>
 
@@ -51,7 +51,7 @@ const Footer = () => {
                         </div>
 
                         {/* Copyright */}
-                        <div className='pt-8 border-t border-border/50'>
+                        <div className='pt-8'>
                             <p className='text-muted-foreground text-sm'>© {currentYear} Tous droits réservés.</p>
                         </div>
                     </div>

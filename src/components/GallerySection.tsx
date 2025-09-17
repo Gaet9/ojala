@@ -27,20 +27,7 @@ const GallerySection = () => {
     const [carouselPage, setCarouselPage] = useState(0); // 0: first 20, 1: rest
     // Ref for the title section
     const titleRef = React.useRef<HTMLDivElement>(null);
-    const isInitialMountRef = React.useRef(true);
-
-    React.useEffect(() => {
-        // Skip scroll on initial mount
-        if (isInitialMountRef.current) {
-            isInitialMountRef.current = false;
-            return;
-        }
-
-        if (titleRef.current) {
-            const y = titleRef.current.getBoundingClientRect().top + window.scrollY - 24; // adjust offset as needed
-            window.scrollTo({ top: y, behavior: "smooth" });
-        }
-    }, [carouselPage]);
+    // Removed auto-scroll on page change to avoid unexpected jumps
 
     // Generate gallery items from images
     const galleryItems = sortedImages.map((img, idx) => {
@@ -81,6 +68,27 @@ const GallerySection = () => {
         twelvethPageItems,
     ];
 
+    // Per-page metadata (custom title and subtitle for each page)
+    const defaultTitle = "Illustrations";
+    const defaultSubtitle = "Photos pour accompagner la lecture du livre";
+    const pageMeta: { title: string; subtitle: string }[] = Array.from({ length: pages.length }, () => ({
+        title: defaultTitle,
+        subtitle: defaultSubtitle,
+    }));
+    // Example customization (you can edit these lines to set your own titles):
+    pageMeta[0] = { title: "Traversée de l'Atlantique", subtitle: "Du 11/11/22 au 25/12/22. \nPages 1-32" };
+    pageMeta[1] = { title: "Guadeloupe", subtitle: "Du 26/12/22 au 08/02/23. \nPages 33-52." };
+    pageMeta[2] = { title: "Antigua", subtitle: "Du 19/02/23 au 22/02/23. \nPages 53-58." };
+    pageMeta[3] = { title: "Kundalini - Dominique - Martinique", subtitle: "Du 27/02/23 au 24/03/23. \nPages 59-68." };
+    pageMeta[4] = { title: "Traversée de la mer des Caraïbes", subtitle: "Du 28/03/23 au 08/04/23. \nPages 69-75." };
+    pageMeta[5] = { title: "Finca colombienne", subtitle: "Du 12/04/23 au 17/05/23. \nPages 76-82." };
+    pageMeta[6] = { title: "Traversée de la Colombie en Vélo, partie 1", subtitle: "Du 19/05/23 au 25/06/23. \nPages 83-102." };
+    pageMeta[7] = { title: "Traversée de la Colombie en Vélo, partie 2", subtitle: "Du 07/07/23 au 27/08/23. \nPages 103-132." };
+    pageMeta[8] = { title: "Traversée de l'Equateur en Vélo", subtitle: "Du 28/08/23 au 12/11/23. \nPages 133-152." };
+    pageMeta[9] = { title: "Perou - Amazonie - Cusco", subtitle: "Du 23/11/23 au 05/02/24. \nPages 153-164." };
+    pageMeta[10] = { title: "Bolivie", subtitle: "Du 13/02/24 au 25/02/24. \nPages 165-166." };
+    pageMeta[11] = { title: "Argentine", subtitle: "Du 03/03/24 au 31/03/24. \nPages 167-168." };
+
     const openLightbox = (index: number) => {
         setSelectedImage(index);
         document.body.style.overflow = "hidden";
@@ -96,11 +104,14 @@ const GallerySection = () => {
             <div className='w-full max-w-7xl mx-auto'>
                 <div className='px-6'>
                     <div className='text-center mb-16' ref={titleRef}>
-                        <h2 className='text-3xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent'>
+                        <h2 className='text-3xl md:text-5xl font-bold mb-3 bg-gradient-primary bg-clip-text text-transparent'>
                             Illustrations
                         </h2>
-                        <p className='text-xl text-muted-foreground font-medium max-w-2xl mx-auto'>
-                            Photos pour accompagner la lecture du livre
+                        <h3 className='text-2xl md:text-3xl font-semibold mb-2 whitespace-pre-line'>
+                            {pageMeta[carouselPage]?.title || defaultTitle}
+                        </h3>
+                        <p className='text-xl text-muted-foreground font-medium max-w-2xl mx-auto whitespace-pre-line'>
+                            {pageMeta[carouselPage]?.subtitle || defaultSubtitle}
                         </p>
                     </div>
                     {/* Carousel navigation top*/}
@@ -132,21 +143,16 @@ const GallerySection = () => {
                             return (
                                 <div
                                     key={globalIndex}
-                                    className='group gallery-item fade-in'
-                                    style={{ animationDelay: `${index * 0.1}s` }}
+                                    className='gallery-item fade-in group transform-gpu ease-out hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 h-full flex flex-col will-change-transform'
                                     onClick={() => openLightbox(globalIndex)}>
-                                    <div className='relative overflow-hidden'>
-                                        <img
-                                            src={item.src}
-                                            alt={item.alt}
-                                            className='w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500'
-                                        />
-                                        <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center'>
+                                    <div className='relative overflow-hidden aspect-[4/3]'>
+                                        <img src={item.src} alt={item.alt} className='w-full h-full object-cover' />
+                                        <div className='absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
                                             <ZoomIn className='w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
                                         </div>
                                     </div>
                                     <div className='gallery-caption'>
-                                        <p>{item.caption}</p>
+                                        <p className='whitespace-pre-line'>{item.caption}</p>
                                     </div>
                                 </div>
                             );
@@ -182,8 +188,8 @@ const GallerySection = () => {
                             <div className='relative max-w-4xl max-h-full'>
                                 <button
                                     onClick={closeLightbox}
-                                    className='absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors duration-200 z-10'>
-                                    <X className='w-8 h-8' />
+                                    className='absolute top-0 -right-10 text-white hover:text-gray-300 transition-colors duration-200 z-10'>
+                                    <X className='w-8 h-8 hover:bg-red-500/80 rounded transition-all duration-200' />
                                 </button>
                                 <img
                                     src={galleryItems[selectedImage].src}

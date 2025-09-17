@@ -28,7 +28,7 @@ const HeroSection = () => {
 
                     {/* Title & Tagline */}
                     <div className='mb-12 slide-up' style={{ animationDelay: "0.2s" }}>
-                        <h1 className='hero-title mb-6'>OJALÀ</h1>
+                        <h2 className='hero-title mb-6'>OJALÀ</h2>
                         <p className='hero-tagline max-w-3xl mx-auto'>
                             Découvrez l'histoire d'un voyage à la voile à travers l'Atlantique et les Caraïbes, puis à vélo dans les Andes
                             d'Amérique du Sud.
@@ -42,7 +42,7 @@ const HeroSection = () => {
                             target='_blank'
                             rel='noopener noreferrer'
                             className='btn-primary inline-flex items-center text-lg group'>
-                            <span>Obtenez votre examplaire</span>
+                            <span>Obtenez votre exemplaire</span>
                             <ExternalLink className='w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300' />
                         </a>
 
@@ -54,7 +54,7 @@ const HeroSection = () => {
                                 <span className='ml-2 font-medium'>Note : 5/5</span>
                             </div>
                             <span className='w-1 h-1 bg-muted-foreground rounded-full' />
-                            <span className='font-medium'>Disponible maintenant en livre broché et ebook</span>
+                            <span className='font-medium'>Disponible maintenant en livre et ebook</span>
                         </div>
                     </div>
                 </div>

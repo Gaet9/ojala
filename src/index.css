@@ -148,7 +148,7 @@ All colors MUST be HSL.
 @layer components {
     /* Hero Section Styles */
     .hero-title {
-        @apply text-5xl md:text-7xl font-black leading-tight;
+        @apply text-4xl md:text-6xl font-black leading-tight;
         font-family: "Cinzel", serif;
         background: var(--gradient-primary);
         background-clip: text;
@@ -166,7 +166,24 @@ All colors MUST be HSL.
         @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground;
         @apply font-semibold px-8 py-4 rounded-full;
         @apply shadow-elegant hover:shadow-glow;
-        @apply transition-all duration-300 hover:scale-105 hover:brightness-110;
+        @apply transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-95;
+        @apply ring-1 ring-primary/30 hover:ring-2 hover:ring-primary/60;
+        @apply relative overflow-hidden;
+    }
+
+    /* Epic shine sweep */
+    .btn-primary::after {
+        content: "";
+        position: absolute;
+        inset: -150% -50%;
+        background: linear-gradient(120deg, transparent 30%, hsl(var(--primary-foreground) / 0.15) 50%, transparent 70%);
+        transform: translateX(-100%);
+        transition: transform 600ms ease;
+        pointer-events: none;
+    }
+
+    .btn-primary:hover::after {
+        transform: translateX(100%);
     }
 
     .btn-secondary {
