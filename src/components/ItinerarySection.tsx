@@ -88,7 +88,7 @@ const ItinerarySection = () => {
                             <div className='relative max-w-4xl max-h-full'>
                                 <button
                                     onClick={closeLightbox}
-                                    className='absolute top-0 -right-10 text-white hover:text-gray-300 transition-colors duration-200 z-10'>
+                                    className='absolute top-5 right-5 text-white hover:text-gray-300 transition-colors duration-200 z-10'>
                                     <X className='w-8 h-8 hover:bg-red-500/80 rounded transition-all duration-200' />
                                 </button>
                                 <img
