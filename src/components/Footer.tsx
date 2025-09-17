@@ -5,7 +5,7 @@ const Footer = () => {
 
     const socialLinks = [
         { icon: Linkedin, href: "https://www.linkedin.com/in/gaetandelorgeril", label: "LinkedIn" },
-        { icon: Mail, href: "gaetan.delorgeril@gmail.com", label: "Email" },
+        { icon: Mail, href: "mailto:gaetan.delorgeril@gmail.com", label: "Email" },
     ];
 
     return (
@@ -52,17 +52,7 @@ const Footer = () => {
 
                         {/* Copyright */}
                         <div className='pt-8 border-t border-border/50'>
-                            <p className='text-muted-foreground text-sm'>
-                                © {currentYear} Tous droits réservés. Fait avec passion et amour.
-                            </p>
-                            <div className='mt-4 flex justify-center gap-6 text-xs text-muted-foreground/70'>
-                                <a href='#' className='hover:text-foreground transition-colors duration-200'>
-                                    Politique de confidentialité
-                                </a>
-                                <a href='#' className='hover:text-foreground transition-colors duration-200'>
-                                    Conditions d'utilisation
-                                </a>
-                            </div>
+                            <p className='text-muted-foreground text-sm'>© {currentYear} Tous droits réservés.</p>
                         </div>
                     </div>
                 </div>

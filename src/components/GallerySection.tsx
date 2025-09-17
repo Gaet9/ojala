@@ -108,8 +108,10 @@ const GallerySection = () => {
                         {pages.map((items, idx) => (
                             <button
                                 key={idx}
-                                className={`px-4 py-2 rounded ${
-                                    carouselPage === idx ? "bg-primary text-white" : "bg-muted-foreground text-primary"
+                                className={`px-4 py-2 rounded font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
+                                    carouselPage === idx
+                                        ? "bg-primary text-white shadow-primary hover:-translate-y-0.5"
+                                        : "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5"
                                 }`}
                                 onClick={() => setCarouselPage(idx)}
                                 disabled={carouselPage === idx || items.length === 0}>
@@ -155,8 +157,10 @@ const GallerySection = () => {
                         {pages.map((items, idx) => (
                             <button
                                 key={idx}
-                                className={`px-4 py-2 rounded ${
-                                    carouselPage === idx ? "bg-primary text-white" : "bg-muted-foreground text-primary"
+                                className={`px-4 py-2 rounded font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
+                                    carouselPage === idx
+                                        ? "bg-primary text-white shadow-primary hover:-translate-y-0.5"
+                                        : "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5"
                                 }`}
                                 onClick={() => {
                                     setCarouselPage(idx);
