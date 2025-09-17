@@ -25,9 +25,18 @@ const sortedImages = imageEntries
 const GallerySection = () => {
     const [selectedImage, setSelectedImage] = useState<number | null>(null);
     const [carouselPage, setCarouselPage] = useState(0); // 0: first 20, 1: rest
+    const [shouldScrollToTitle, setShouldScrollToTitle] = useState(false);
     // Ref for the title section
     const titleRef = React.useRef<HTMLDivElement>(null);
-    // Removed auto-scroll on page change to avoid unexpected jumps
+    // Scroll to the section title only when explicitly requested (via button click)
+    React.useEffect(() => {
+        if (!shouldScrollToTitle) return;
+        if (titleRef.current) {
+            const y = titleRef.current.getBoundingClientRect().top + window.scrollY - 24;
+            window.scrollTo({ top: y, behavior: "smooth" });
+        }
+        setShouldScrollToTitle(false);
+    }, [carouselPage, shouldScrollToTitle]);
 
     // Generate gallery items from images
     const galleryItems = sortedImages.map((img, idx) => {
@@ -124,7 +133,10 @@ const GallerySection = () => {
                                         ? "bg-primary text-white shadow-primary hover:-translate-y-0.5"
                                         : "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5"
                                 }`}
-                                onClick={() => setCarouselPage(idx)}
+                                onClick={() => {
+                                    setCarouselPage(idx);
+                                    setShouldScrollToTitle(true);
+                                }}
                                 disabled={carouselPage === idx || items.length === 0}>
                                 {idx + 1}
                             </button>
@@ -170,11 +182,7 @@ const GallerySection = () => {
                                 }`}
                                 onClick={() => {
                                     setCarouselPage(idx);
-                                    // Scroll to title section
-                                    if (titleRef.current) {
-                                        const y = titleRef.current.getBoundingClientRect().top + window.scrollY - 24;
-                                        window.scrollTo({ top: y, behavior: "smooth" });
-                                    }
+                                    setShouldScrollToTitle(true);
                                 }}
                                 disabled={carouselPage === idx || items.length === 0}>
                                 {idx + 1}
