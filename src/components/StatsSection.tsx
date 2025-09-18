@@ -1,18 +1,20 @@
 import AnimatedCounter from "./AnimatedCounter";
 import { TrendingUp, Users, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const StatsSection = () => {
+    const { t } = useTranslation();
     const stats = [
         {
             icon: TrendingUp,
-            label: "Exemplaires vendus",
+            label: t("stats.sold"),
             value: 7,
             suffix: "+",
             color: "text-emerald-500",
         },
         {
             icon: Star,
-            label: "Note moyenne",
+            label: t("stats.rating"),
             value: 5,
             decimals: 1,
             suffix: "/5",
@@ -20,7 +22,7 @@ const StatsSection = () => {
         },
         {
             icon: Users,
-            label: "Avis",
+            label: t("stats.reviews"),
             value: 1,
             suffix: "+",
             color: "text-blue-500",
@@ -33,11 +35,9 @@ const StatsSection = () => {
                 <div className='px-6'>
                     <div className='text-center mb-16'>
                         <h2 className='text-3xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent'>
-                            Approuvé par les lecteurs
+                            {t("stats.heading")}
                         </h2>
-                        <p className='text-xl text-muted-foreground font-medium max-w-2xl mx-auto'>
-                            Rejoignez les lecteurs passionés de voyage et d'aventure.
-                        </p>
+                        <p className='text-xl text-muted-foreground font-medium max-w-2xl mx-auto'>{t("stats.subheading")}</p>
                     </div>
 
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto'>
