@@ -55,7 +55,7 @@ export function LanguageToggle() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant='outline' size='icon' aria-label='Change language'>
+                <Button className='hover:bg-gradient-hero' variant='outline' size='icon' aria-label='Change language'>
                     <span className='inline-block' aria-hidden>
                         <CurrentIcon />
                     </span>

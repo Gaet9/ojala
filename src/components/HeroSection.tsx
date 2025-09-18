@@ -8,7 +8,9 @@ const HeroSection = () => {
     const { t } = useTranslation();
     return (
         <section className='min-h-screen bg-gradient-hero relative overflow-hidden'>
-            <div className='absolute top-4 right-4 z-20 flex gap-2'>
+            <div
+                className='flex flex-col sm:flex-row 
+                            absolute top-4 left-4 z-20 gap-2'>
                 <LanguageToggle />
                 <ModeToggle />
             </div>
