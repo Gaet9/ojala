@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
-import ItinerarySection from "@/components/ItinerarySection";
+import LeafletMapSection from "@/components/LeafletMapSection";
 import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 const BookLanding = () => {
     useEffect(() => {
@@ -30,9 +32,15 @@ const BookLanding = () => {
 
     return (
         <div className='min-h-screen bg-background w-full'>
+            <div
+                className='fixed top-4 left-4 z-50
+                        flex flex-col sm:flex-row gap-2'>
+                <LanguageToggle />
+                <ModeToggle />
+            </div>
             <HeroSection />
             <StatsSection />
-            <ItinerarySection />
+            <LeafletMapSection />
             <GallerySection />
             <Footer />
         </div>

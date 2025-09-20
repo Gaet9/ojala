@@ -33,9 +33,48 @@ const resources = {
                     11: { title: "Argentine", subtitle: "Du 03/03/24 au 31/03/24. \nPages 167-168." },
                 },
             },
+            map: {
+                heading: "Carte du voyage",
+                subtitle: "Suivez le parcours complet à travers l'Atlantique et l'Amérique du Sud",
+                legend: {
+                    start: "Départ",
+                    stops: "Étapes",
+                    end: "Arrivée",
+                },
+                stats: {
+                    stops: "Étapes",
+                    countries: "Pays",
+                    days: "Jours",
+                    distance: "Km",
+                },
+                details: {
+                    date: "Date",
+                    coordinates: "Coordonnées",
+                    description: "Description",
+                    location: "Lieu",
+                },
+            },
             itinerary: {
                 heading: "Itinéraire du voyage",
                 subtitle: "Quatre étapes clés pour visualiser le voyage",
+                items: {
+                    complete: {
+                        caption: "Itinéraire complet. \nDu 11/11/22 au 31/03/24.",
+                        alt: "Itinéraire complet. Du 11/11/22 au 31/03/24.",
+                    },
+                    caribbean: {
+                        caption: "Itinéraire des Caraïbes. \nDu 24/12/22 au 28/03/23. \nPages 32-74",
+                        alt: "Itinéraire des Caraïbes. Du 24/12/22 au 28/03/23. Pages 32-74",
+                    },
+                    colombia: {
+                        caption: "Itinéraire en Colombie et Équateur. \nDu 28/03/23 au 12/11/23. \nPages 75-152",
+                        alt: "Itinéraire en Colombie et Équateur. Du 28/03/23 au 12/11/23. Pages 75-152",
+                    },
+                    sa: {
+                        caption: "Itinéraire au Pérou, Bolivie et Argentine. \nDu 12/11/23 au 31/03/24. \nPages 153-169",
+                        alt: "Itinéraire au Pérou, Bolivie et Argentine. Du 12/11/23 au 31/03/24. Pages 153-169",
+                    },
+                },
             },
             stats: {
                 heading: "Approuvé par les lecteurs",
@@ -86,6 +125,27 @@ const resources = {
                     9: { title: "Peru - Amazon - Cusco", subtitle: "From 11/23/23 to 02/05/24. \nPages 153-164." },
                     10: { title: "Bolivia", subtitle: "From 02/13/24 to 02/25/24. \nPages 165-166." },
                     11: { title: "Argentina", subtitle: "From 03/03/24 to 03/31/24. \nPages 167-168." },
+                },
+            },
+            map: {
+                heading: "Journey Map",
+                subtitle: "Follow the complete route across the Atlantic and South America",
+                legend: {
+                    start: "Start",
+                    stops: "Stops",
+                    end: "End",
+                },
+                stats: {
+                    stops: "Stops",
+                    countries: "Countries",
+                    days: "Days",
+                    distance: "Km",
+                },
+                details: {
+                    date: "Date",
+                    coordinates: "Coordinates",
+                    description: "Description",
+                    location: "Location",
                 },
             },
             itinerary: {
@@ -159,6 +219,27 @@ const resources = {
                     9: { title: "Perú - Amazonía - Cusco", subtitle: "Del 23/11/23 al 05/02/24. \nPáginas 153-164." },
                     10: { title: "Bolivia", subtitle: "Del 13/02/24 al 25/02/24. \nPáginas 165-166." },
                     11: { title: "Argentina", subtitle: "Del 03/03/24 al 31/03/24. \nPáginas 167-168." },
+                },
+            },
+            map: {
+                heading: "Mapa del viaje",
+                subtitle: "Sigue la ruta completa a través del Atlántico y Sudamérica",
+                legend: {
+                    start: "Inicio",
+                    stops: "Paradas",
+                    end: "Final",
+                },
+                stats: {
+                    stops: "Paradas",
+                    countries: "Países",
+                    days: "Días",
+                    distance: "Km",
+                },
+                details: {
+                    date: "Fecha",
+                    coordinates: "Coordenadas",
+                    description: "Descripción",
+                    location: "Ubicación",
                 },
             },
             itinerary: {

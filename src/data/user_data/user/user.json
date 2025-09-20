@@ -1,0 +1,32 @@
+{
+    "id": 5165403,
+    "username": "GaetanDelorgeril",
+    "first_name": "Gaetan",
+    "last_name": "De lorgeril",
+    "living_location": {
+        "id": 66198408,
+        "name": "Lyon",
+        "detail": "France",
+        "full_detail": "Auvergne-Rh\u00f4ne-Alpes, France",
+        "country_code": "FR",
+        "lat": 45.7578137,
+        "lon": 4.8320114,
+        "venue": "",
+        "uuid": "11BEF7FD-4D93-4CB7-AED7-1D32342DD917"
+    },
+    "living_location_name": "Lyon, France",
+    "locale": "fr_FR",
+    "profile_image_path": "https://polarsteps.s3.amazonaws.com/user_images/profile/large_thumb/u_5165403/179884a3-5098-4063-8c0b-3e9283f5113b_6BA07AC1-DE01-4D3F-8CD7-BFBA09D6B5BB.jpg",
+    "profile_image_thumb_path": "https://polarsteps.s3.amazonaws.com/user_images/profile/small_thumb/u_5165403/179884a3-5098-4063-8c0b-3e9283f5113b_1C2A735F-4A2B-4A50-85E1-3FB2C9F59C52.jpg",
+    "description": "",
+    "unit_is_km": true,
+    "visibility": 0,
+    "temperature_is_celsius": true,
+    "email": "gaetan.delorgeril@gmail.com",
+    "saved_spots": [],
+    "saved_guides": [],
+    "google_id": "106450045893557853427",
+    "fb_id": null,
+    "currency": "EUR",
+    "uuid": "179884a3-5098-4063-8c0b-3e9283f5113b"
+}

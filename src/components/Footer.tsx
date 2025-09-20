@@ -22,7 +22,7 @@ const Footer = () => {
                             </h3>
                             <p className='text-muted-foreground mb-8 max-w-2xl mx-auto'>{t("footer.pitch")}</p>
                             <a
-                                href='https://amzn.eu/d/its4qzt'
+                                href='https://amzn.eu/d/ebWaZTI'
                                 target='_blank'
                                 rel='noopener noreferrer'
                                 className='btn-primary inline-flex items-center text-lg group'>

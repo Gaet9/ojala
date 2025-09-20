@@ -1,21 +1,12 @@
 import { ExternalLink, Star } from "lucide-react";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import { LanguageToggle } from "@/components/ui/language-toggle";
 import { useTranslation } from "react-i18next";
 import bookCover from "../assets/Photos/Couverture2.jpg";
 
 const HeroSection = () => {
     const { t } = useTranslation();
     return (
-        <section className='min-h-screen bg-gradient-hero relative overflow-hidden'>
-            <div
-                className='flex flex-col sm:flex-row 
-                            absolute top-4 left-4 z-20 gap-2'>
-                <LanguageToggle />
-                <ModeToggle />
-            </div>
+        <section className='min-h-screen relative overflow-hidden'>
             {/* Background decoration */}
-            <div className='absolute inset-0 bg-gradient-subtle opacity-50' />
             <div className='absolute top-1/4 left-1/4 w-96 h-96 bg-primary-glow/10 rounded-full blur-3xl' />
             <div className='absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl' />
 
@@ -41,7 +32,7 @@ const HeroSection = () => {
                     {/* CTA Button */}
                     <div className='scale-in' style={{ animationDelay: "0.4s" }}>
                         <a
-                            href='https://amzn.eu/d/its4qzt'
+                            href='https://amzn.eu/d/ebWaZTI'
                             target='_blank'
                             rel='noopener noreferrer'
                             className='btn-primary inline-flex items-center text-lg group'>
