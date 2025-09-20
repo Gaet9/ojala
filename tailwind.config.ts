@@ -64,6 +64,7 @@ export default {
                 "gradient-primary": "var(--gradient-primary)",
                 "gradient-subtle": "var(--gradient-subtle)",
                 "gradient-hero": "var(--gradient-hero)",
+                "gradient-radial": "radial-gradient(ellipse at center, var(--tw-gradient-stops))",
             },
             boxShadow: {
                 elegant: "var(--shadow-elegant)",

@@ -11,7 +11,7 @@ const Footer = () => {
     ];
 
     return (
-        <footer className='bg-gradient-subtle'>
+        <footer className='bg-gradient-radial from-white/85 via-white/75 to-white/90 dark:from-primary/15 dark:via-primary/8 dark:to-black/95'>
             <div className='w-full max-w-7xl mx-auto'>
                 <div className='px-6 py-16'>
                     <div className='text-center'>

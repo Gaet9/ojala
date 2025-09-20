@@ -111,7 +111,7 @@ const GallerySection = () => {
     };
 
     return (
-        <section className='py-24 bg-background'>
+        <section className='py-24 bg-gradient-radial from-white/80 via-white/70 to-white/90 dark:from-primary/10 dark:via-primary/5 dark:to-black/95'>
             <div className='w-full max-w-7xl mx-auto'>
                 <div className='px-6'>
                     <div className='text-center mb-16' ref={titleRef}>

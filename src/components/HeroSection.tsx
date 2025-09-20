@@ -5,10 +5,8 @@ import bookCover from "../assets/Photos/Couverture2.jpg";
 const HeroSection = () => {
     const { t } = useTranslation();
     return (
-        <section className='min-h-screen relative overflow-hidden'>
+        <section className='min-h-screen relative overflow-hidden bg-gradient-radial from-white/90 via-white/80 to-white/95 dark:from-primary/20 dark:via-primary/10 dark:to-black/95'>
             {/* Background decoration */}
-            <div className='absolute top-1/4 left-1/4 w-96 h-96 bg-primary-glow/10 rounded-full blur-3xl' />
-            <div className='absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl' />
 
             <div className='min-h-screen flex items-center justify-center text-center relative z-10'>
                 <div className='w-full max-w-6xl mx-auto px-6'>

@@ -6,6 +6,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "flag-icons/css/flag-icons.min.css";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import { useTheme } from "@/components/ui/use-theme";
 import tripData from "../data/trip.json";
 
 // Fix for default markers in react-leaflet
@@ -61,6 +62,7 @@ const transformTripDataToMapPoints = (tripData: { all_steps: TripStep[] }): MapP
 
 const LeafletMapSection = () => {
     const { t } = useTranslation();
+    const { theme } = useTheme();
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState<Array<{ label: string; x: number; y: number }>>([]);
     const [map, setMap] = useState<L.Map | null>(null);
@@ -358,7 +360,7 @@ const LeafletMapSection = () => {
     };
 
     return (
-        <section className='py-2'>
+        <section className='py-2 bg-gradient-radial from-white/80 via-white/70 to-white/90 dark:from-primary/10 dark:via-primary/5 dark:to-black/95'>
             <div className='w-full max-w-7xl mx-auto px-6'>
                 <div className='text-center mb-12'>
                     <h2 className='text-3xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent'>
