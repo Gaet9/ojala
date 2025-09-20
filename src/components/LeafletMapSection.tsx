@@ -407,7 +407,7 @@ const LeafletMapSection = () => {
                     )}
 
                     {/* Map Container */}
-                    <div className='bg-white dark:bg-gray-900 w-3/4 mx-auto rounded-2xl shadow-2xl overflow-hidden border border-border'>
+                    <div className='bg-white dark:bg-gray-900 w-full md:w-3/4 mx-auto rounded-2xl shadow-2xl overflow-hidden border border-border'>
                         <div className='h-[500px] w-full'>
                             <MapContainer
                                 center={[10, -60]}
