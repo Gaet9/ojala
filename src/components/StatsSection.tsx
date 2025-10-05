@@ -22,7 +22,7 @@ const StatsSection = () => {
         {
             icon: Users,
             label: t("stats.reviews"),
-            value: 1,
+            value: 2,
             suffix: "+",
             color: "text-blue-500",
         },

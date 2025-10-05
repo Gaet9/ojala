@@ -6,6 +6,7 @@ import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
+import TopNav from "@/components/TopNav";
 
 const BookLanding = () => {
     useEffect(() => {
@@ -32,17 +33,28 @@ const BookLanding = () => {
 
     return (
         <div className='min-h-screen bg-background w-full'>
+            <TopNav />
             <div
-                className='fixed top-4 left-4 z-50
+                className='fixed top-16 left-4 z-50
                         flex flex-col sm:flex-row gap-2'>
                 <LanguageToggle />
                 <ModeToggle />
             </div>
-            <HeroSection />
-            <StatsSection />
-            <LeafletMapSection />
-            <GallerySection />
-            <Footer />
+            <section id='book'>
+                <HeroSection />
+            </section>
+            <section id='stats'>
+                <StatsSection />
+            </section>
+            <section id='map' className='scroll-mt-16'>
+                <LeafletMapSection />
+            </section>
+            <section id='photos' className='-scroll-mt-6'>
+                <GallerySection />
+            </section>
+            <section id='contact'>
+                <Footer />
+            </section>
         </div>
     );
 };
