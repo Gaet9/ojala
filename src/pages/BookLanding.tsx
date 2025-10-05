@@ -33,13 +33,10 @@ const BookLanding = () => {
 
     return (
         <div className='min-h-screen bg-background w-full'>
-            <TopNav />
-            <div
-                className='fixed top-16 left-4 z-50
-                        flex flex-col sm:flex-row gap-2'>
+            <TopNav>
                 <LanguageToggle />
                 <ModeToggle />
-            </div>
+            </TopNav>
             <section id='book'>
                 <HeroSection />
             </section>
