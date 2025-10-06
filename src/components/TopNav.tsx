@@ -14,7 +14,7 @@ const TopNav: React.FC<TopNavProps> = ({ children }) => {
     ];
 
     return (
-        <nav className='fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-border'>
+        <nav className='fixed top-0 left-0 right-0 z-[9999] backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-border'>
             <div className='max-w-7xl mx-auto px-4 sm:px-6'>
                 <div className='h-14 grid grid-cols-3 items-center'>
                     <div className='flex items-center gap-2 justify-start'>{children}</div>
