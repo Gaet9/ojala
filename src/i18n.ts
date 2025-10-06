@@ -5,6 +5,13 @@ import LanguageDetector from "i18next-browser-languagedetector";
 const resources = {
     fr: {
         translation: {
+            nav: {
+                book: "Livre",
+                stats: "Chiffres",
+                map: "Carte",
+                photos: "Photos",
+                contact: "Contact",
+            },
             hero: {
                 title: "OJALÀ",
                 tagline:
@@ -99,6 +106,13 @@ const resources = {
     },
     en: {
         translation: {
+            nav: {
+                book: "Book",
+                stats: "Stats",
+                map: "Map",
+                photos: "Photos",
+                contact: "Contact",
+            },
             hero: {
                 title: "OJALÀ",
                 tagline:
@@ -193,6 +207,13 @@ const resources = {
     },
     es: {
         translation: {
+            nav: {
+                book: "Libro",
+                stats: "Números",
+                map: "Mapa",
+                photos: "Fotos",
+                contact: "Contacto",
+            },
             hero: {
                 title: "OJALÀ",
                 tagline:

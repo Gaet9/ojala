@@ -2,18 +2,20 @@ import React from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type TopNavProps = {
     children?: React.ReactNode;
 };
 
 const TopNav: React.FC<TopNavProps> = ({ children }) => {
+    const { t } = useTranslation();
     const links = [
-        { href: "#book", label: "Book" },
-        { href: "#stats", label: "Stats" },
-        { href: "#map", label: "Map" },
-        { href: "#photos", label: "Photos" },
-        { href: "#contact", label: "Contact" },
+        { href: "#book", label: t("nav.book") },
+        { href: "#stats", label: t("nav.stats") },
+        { href: "#map", label: t("nav.map") },
+        { href: "#photos", label: t("nav.photos") },
+        { href: "#contact", label: t("nav.contact") },
     ];
 
     return (
