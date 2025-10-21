@@ -89,6 +89,7 @@ const resources = {
                 sold: "Exemplaires vendus",
                 rating: "Note moyenne",
                 reviews: "Avis",
+                customerReviews: "Avis des lecteurs",
             },
             footer: {
                 ready: "Prêt pour le voyage ?",
@@ -190,6 +191,7 @@ const resources = {
                 sold: "Copies sold",
                 rating: "Average rating",
                 reviews: "Reviews",
+                customerReviews: "Customer reviews",
             },
             footer: {
                 ready: "Ready for the journey?",
@@ -291,6 +293,7 @@ const resources = {
                 sold: "Ejemplares vendidos",
                 rating: "Valoración media",
                 reviews: "Reseñas",
+                customerReviews: "Reseñas de los lectores",
             },
             footer: {
                 ready: "¿Listo para el viaje?",

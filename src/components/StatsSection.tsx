@@ -8,7 +8,7 @@ const StatsSection = () => {
         {
             icon: TrendingUp,
             label: t("stats.sold"),
-            value: 7,
+            value: 8,
             suffix: "+",
             color: "text-emerald-500",
         },
@@ -22,9 +22,19 @@ const StatsSection = () => {
         {
             icon: Users,
             label: t("stats.reviews"),
-            value: 2,
+            value: 3,
             suffix: "+",
             color: "text-blue-500",
+        },
+    ];
+
+    const reviews = [
+        {
+            icon: Star,
+            title: "Super carnet de bord",
+            label: "Cindy O. - France - 05/10/2025",
+            label2: "Format Kindle",
+            value: `Super carnet de bord, on s'y croirait, je recommande`,
         },
     ];
 
@@ -68,20 +78,45 @@ const StatsSection = () => {
                         ))}
                     </div>
 
-                    {/* <div className='text-center mt-16'>
-                        <div className='inline-flex items-center gap-4 bg-accent/50 rounded-full px-6 py-3 backdrop-blur-sm'>
-                            <div className='flex -space-x-2'>
-                                {[...Array(4)].map((_, i) => (
-                                    <div
-                                        key={i}
-                                        className='w-8 h-8 bg-gradient-primary rounded-full border-2 border-background flex items-center justify-center text-xs font-bold text-primary-foreground'>
-                                        {String.fromCharCode(65 + i)}
-                                    </div>
-                                ))}
-                            </div>
-                            <span className='text-sm font-medium text-muted-foreground'>Real readers, real impact</span>
+                    {/* Reviews Section */}
+                    <div className='mt-16 max-w-4xl mx-auto'>
+                        <div className='text-center mb-8'>
+                            <h3 className='text-2xl md:text-3xl font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent'>
+                                {t("stats.customerReviews")}
+                            </h3>
                         </div>
-                    </div> */}
+
+                        <div className='grid gap-6'>
+                            {reviews.map((review, index) => (
+                                <div
+                                    key={index}
+                                    className='bg-card rounded-3xl p-6 md:p-8 shadow-card hover:shadow-elegant transition-all duration-500 group border border-border/50'>
+                                    <div className='flex items-start gap-4'>
+                                        <div className='inline-flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300'>
+                                            <review.icon className='w-6 h-6 text-primary-foreground' />
+                                        </div>
+                                        <div className='flex-1'>
+                                            <blockquote className='text-base md:text-lg leading-tight text-primary font-bold'>
+                                                {review.title}
+                                            </blockquote>
+                                            <div className='flex items-center gap-2 mb-1'>
+                                                <div className='flex text-amber-500'>
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <Star key={i} className='w-4 h-4 fill-current' />
+                                                    ))}
+                                                </div>
+                                                <span className='text-sm font-medium text-muted-foreground'>{review.label}</span>
+                                            </div>
+                                            <span className='text-sm font-light text-muted-foreground'>{review.label2}</span>
+                                            <blockquote className='text-base md:text-lg leading-tight text-foreground italic'>
+                                                "{review.value}"
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
