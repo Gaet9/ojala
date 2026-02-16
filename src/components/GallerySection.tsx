@@ -198,11 +198,11 @@ const GallerySection = () => {
                         </p>
                     </div>
                     {/* Carousel navigation top*/}
-                    <div className='flex justify-center mb-8 gap-4 flex-wrap'>
+                    <div className='flex justify-center mb-8 gap-2.5 sm:gap-4 flex-wrap'>
                         {pages.map((items, idx) => (
                             <button
                                 key={idx}
-                                className={`px-4 py-2 rounded font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
+                                className={`px-2 py-1 sm:px-4 rounded text-xs sm:text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
                                     carouselPage === idx ?
                                         "bg-primary text-white shadow-primary hover:-translate-y-0.5"
                                     :   "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5 dark:border-neutral-700 dark:text-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
@@ -272,11 +272,11 @@ const GallerySection = () => {
                         })}
                     </div>
                     {/* Carousel navigation bottom*/}
-                    <div className='flex justify-center mt-8 gap-4 flex-wrap'>
+                    <div className='flex justify-center mt-8 gap-2.5 sm:gap-4 flex-wrap'>
                         {pages.map((items, idx) => (
                             <button
                                 key={idx}
-                                className={`px-4 py-2 rounded font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
+                                className={`px-2 py-1 sm:px-4 rounded text-xs sm:text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
                                     carouselPage === idx ?
                                         "bg-primary text-white shadow-primary hover:-translate-y-0.5"
                                     :   "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5 dark:border-neutral-700 dark:text-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
