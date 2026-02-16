@@ -8,7 +8,7 @@ const StatsSection = () => {
         {
             icon: TrendingUp,
             label: t("stats.sold"),
-            value: 9,
+            value: 10,
             suffix: "+",
             color: "text-emerald-500",
         },
