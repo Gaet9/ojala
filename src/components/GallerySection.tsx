@@ -2,19 +2,17 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import getPhotoMeta from "./photoMeta";
 import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
-// Dynamically import all images from assets/Photos
+// Dynamically import all images from assets/Photos (WebP)
 const imageEntries = [
-    ...Object.entries(import.meta.glob("../assets/Photos/Photo_article*.jpg", { eager: true, as: "url" })),
-    ...Object.entries(import.meta.glob("../assets/Photos/photo_article*.jpg", { eager: true, as: "url" })),
-    ...Object.entries(import.meta.glob("../assets/Photos/Photo_article*.png", { eager: true, as: "url" })),
-    ...Object.entries(import.meta.glob("../assets/Photos/photo_article*.png", { eager: true, as: "url" })),
+    ...Object.entries(import.meta.glob("../assets/Photos/Photo_article*.webp", { eager: true, as: "url" })),
+    ...Object.entries(import.meta.glob("../assets/Photos/photo_article*.webp", { eager: true, as: "url" })),
 ];
 
-// Sort by the number in Photo_articleX.jpg and keep filename
+// Sort by the number in Photo_articleX.webp and keep filename
 const sortedImages = imageEntries
     .map(([path, url]) => {
-        const match = path.match(/(?:[Pp]hoto_article)(\d+)_?(\d+)?\.(jpg|png)$/);
-        // Handles Photo_articleX.jpg, photo_articleX.jpg, Photo_articleX_Y.png, etc.
+        const match = path.match(/(?:[Pp]hoto_article)(\d+)_?(\d+)?\.webp$/);
+        // Handles Photo_articleX.webp, photo_articleX_Y.webp, etc.
         const mainNum = match ? parseInt(match[1], 10) : 0;
         const subNum = match && match[2] ? parseInt(match[2], 10) : 0;
         // Extract filename from path

@@ -1,6 +1,6 @@
 import { ExternalLink, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import bookCover from "../assets/Photos/Couverture2.jpg";
+import bookCover from "../assets/Photos/Couverture2.webp";
 
 const HeroSection = () => {
     const { t } = useTranslation();

@@ -8,6 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+src/assets-optimized
+*.webp.tmp
+*.webp.new
 dist
 dist-ssr
 *.local
