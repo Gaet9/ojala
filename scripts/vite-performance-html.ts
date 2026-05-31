@@ -15,7 +15,7 @@ export function performanceHtmlPlugin(): Plugin {
                 );
                 if (coverAsset) {
                     preloads.push(
-                        `<link rel="preload" as="image" href="/${coverAsset}" fetchpriority="high" />`,
+                        `<link rel="preload" as="image" type="image/webp" href="/${coverAsset}" fetchpriority="high" />`,
                     );
                 }
 

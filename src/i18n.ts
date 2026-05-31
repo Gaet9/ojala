@@ -1,11 +1,11 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import fr from "./locales/fr";
 
 export const SUPPORTED_LANGUAGES = ["en", "es", "fr"] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
-const LOCALE_LOADERS: Record<SupportedLanguage, () => Promise<{ default: Record<string, unknown> }>> = {
-    fr: () => import("./locales/fr"),
+const LOCALE_LOADERS: Record<Exclude<SupportedLanguage, "fr">, () => Promise<{ default: Record<string, unknown> }>> = {
     en: () => import("./locales/en"),
     es: () => import("./locales/es"),
 };
@@ -30,6 +30,11 @@ function detectLanguage(): SupportedLanguage {
 
 export async function loadLanguage(lng: SupportedLanguage): Promise<void> {
     if (i18n.hasResourceBundle(lng, "translation")) return;
+
+    if (lng === "fr") {
+        i18n.addResourceBundle("fr", "translation", fr, true, true);
+        return;
+    }
 
     const { default: translation } = await LOCALE_LOADERS[lng]();
     i18n.addResourceBundle(lng, "translation", translation, true, true);

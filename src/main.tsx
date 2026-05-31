@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
 import { initI18n } from "./i18n";
 import "./index.css";
 
@@ -8,7 +9,6 @@ if (import.meta.env.DEV) {
 
 const root = createRoot(document.getElementById("root")!);
 
-initI18n().then(async () => {
-    const { default: App } = await import("./App.tsx");
+initI18n().then(() => {
     root.render(<App />);
 });
