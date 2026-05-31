@@ -28,11 +28,7 @@ export function performanceHtmlPlugin(): Plugin {
                     );
                 }
 
-                html = html.replace(
-                    /<link rel="stylesheet" crossorigin href="(\/assets\/main-[^"]+\.css)">/,
-                    (_match, href: string) =>
-                        `<link rel="preload" href="${href}" as="style" onload="this.onload=null;this.rel='stylesheet'" />\n      <noscript><link rel="stylesheet" crossorigin href="${href}"></noscript>`,
-                );
+                // Le CSS principal reste bloquant pour éviter FOUC (boutons, thème, fond).
 
                 if (preloads.length > 0) {
                     html = html.replace("</head>", `      ${preloads.join("\n      ")}\n    </head>`);

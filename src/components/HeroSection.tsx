@@ -5,7 +5,7 @@ import bookCover from "../assets/Photos/Couverture2.webp";
 const HeroSection = () => {
     const { t } = useTranslation();
     return (
-        <section className='min-h-screen relative overflow-hidden bg-gradient-radial from-white/90 via-white/80 to-white/95 dark:from-primary/20 dark:via-primary/10 dark:to-black/95'>
+        <section className='min-h-screen relative overflow-hidden section-surface-hero'>
             {/* Background decoration */}
 
             <div className='min-h-screen flex items-center justify-center text-center relative z-10'>

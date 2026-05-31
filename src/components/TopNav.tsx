@@ -19,7 +19,7 @@ const TopNav: React.FC<TopNavProps> = ({ children }) => {
     ];
 
     return (
-        <nav className='fixed top-0 left-0 right-0 z-[9999] backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-border'>
+        <nav className='fixed top-0 left-0 right-0 z-[9999] backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-background/80 border-b border-border'>
             <div className='max-w-7xl mx-auto px-4 sm:px-6'>
                 <div className='flex justify-between h-14 sm:grid sm:grid-cols-3 items-center'>
                     <div className='flex items-center gap-2 justify-start'>{children}</div>
@@ -33,23 +33,25 @@ const TopNav: React.FC<TopNavProps> = ({ children }) => {
                             </a>
                         ))}
                     </div>
-                    <div className='flex items-center justify-end sm:hidden'>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant='ghost' size='icon' aria-label='Open menu'>
-                                    <Menu className='h-5 w-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align='end' className='z-[2147483647] w-40'>
-                                {links.map((l) => (
-                                    <DropdownMenuItem key={l.href} asChild>
-                                        <a href={l.href} className='w-full'>
-                                            {l.label}
-                                        </a>
-                                    </DropdownMenuItem>
-                                ))}
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                    <div className='flex items-center justify-end'>
+                        <div className='sm:hidden'>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant='ghost' size='icon' aria-label='Open menu'>
+                                        <Menu className='h-5 w-5' />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align='end' className='w-40'>
+                                    {links.map((l) => (
+                                        <DropdownMenuItem key={l.href} asChild>
+                                            <a href={l.href} className='w-full'>
+                                                {l.label}
+                                            </a>
+                                        </DropdownMenuItem>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
                     </div>
                 </div>
             </div>

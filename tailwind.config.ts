@@ -3,18 +3,8 @@ import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
     darkMode: ["class"],
-    // Ne scanner que les composants réellement utilisés (évite ~100 Ko de CSS shadcn inutile)
-    content: [
-        "./index.html",
-        "./src/**/*.{ts,tsx}",
-        "!./src/components/ui/**/*.{ts,tsx}",
-        "./src/components/ui/button.tsx",
-        "./src/components/ui/dropdown-menu.tsx",
-        "./src/components/ui/mode-toggle.tsx",
-        "./src/components/ui/language-toggle.tsx",
-        "./src/components/ui/theme-provider.tsx",
-    ],
-    safelist: ["animate-in"],
+    content: ["./index.html", "./src/**/*.{ts,tsx}"],
+    safelist: ["animate-in", "dark", "light", "sr-only"],
     prefix: "",
     theme: {
         container: {

@@ -195,7 +195,7 @@ const GallerySection = () => {
     };
 
     return (
-        <section className='py-24 bg-gradient-radial from-white/80 via-white/70 to-white/90 dark:from-primary/10 dark:via-primary/5 dark:to-black/95'>
+        <section className='py-24 section-surface'>
             <div className='w-full max-w-7xl mx-auto'>
                 <div className='px-6'>
                     <div className='text-center mb-16' ref={titleRef}>
@@ -217,7 +217,7 @@ const GallerySection = () => {
                                 className={`px-2 py-1 sm:px-4 rounded text-xs sm:text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
                                     carouselPage === idx ?
                                         "bg-primary text-white shadow-primary hover:-translate-y-0.5"
-                                    :   "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5 dark:border-neutral-700 dark:text-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                    :   "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5 dark:border-border dark:text-foreground dark:bg-card dark:hover:bg-secondary"
                                 }`}
                                 onClick={() => {
                                     setCarouselPage(idx);
@@ -297,7 +297,7 @@ const GallerySection = () => {
                                 className={`px-2 py-1 sm:px-4 rounded text-xs sm:text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
                                     carouselPage === idx ?
                                         "bg-primary text-white shadow-primary hover:-translate-y-0.5"
-                                    :   "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5 dark:border-neutral-700 dark:text-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                    :   "border border-primary text-primary bg-white/70 hover:shadow-md hover:shadow-primary hover:-translate-y-0.5 dark:border-border dark:text-foreground dark:bg-card dark:hover:bg-secondary"
                                 }`}
                                 onClick={() => {
                                     setCarouselPage(idx);

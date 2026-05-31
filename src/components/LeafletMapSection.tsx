@@ -359,7 +359,7 @@ const LeafletMapSection = () => {
     };
 
     return (
-        <section className='py-2 bg-gradient-radial from-white/80 via-white/70 to-white/90 dark:from-primary/10 dark:via-primary/5 dark:to-black/95'>
+        <section className='py-2 section-surface'>
             <div className='w-full max-w-7xl mx-auto px-6'>
                 <div className='text-center mb-12'>
                     <h2 className='text-3xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent'>
@@ -378,7 +378,7 @@ const LeafletMapSection = () => {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                                 placeholder='Search for a location...'
-                                className='px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64'
+                                className='px-4 py-2 border border-input rounded-lg bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring w-64'
                             />
                             <Search className='absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400' />
                         </div>
@@ -392,13 +392,13 @@ const LeafletMapSection = () => {
                     {/* Search Results */}
                     {searchResults.length > 0 && (
                         <div className='mb-4 max-w-md mx-auto'>
-                            <div className='bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-48 overflow-y-auto'>
+                            <div className='bg-card border border-border rounded-lg shadow-lg max-h-48 overflow-y-auto'>
                                 {searchResults.map((result, index) => (
                                     <button
                                         key={index}
                                         onClick={() => handleSearchResult(result)}
-                                        className='w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-200 dark:border-gray-600 last:border-b-0'>
-                                        <div className='font-medium text-gray-900 dark:text-gray-100'>{result.label}</div>
+                                        className='w-full px-4 py-2 text-left hover:bg-accent border-b border-border last:border-b-0'>
+                                        <div className='font-medium text-foreground'>{result.label}</div>
                                     </button>
                                 ))}
                             </div>
@@ -406,7 +406,7 @@ const LeafletMapSection = () => {
                     )}
 
                     {/* Map Container */}
-                    <div className='bg-white dark:bg-gray-900 w-full md:w-3/4 mx-auto rounded-2xl shadow-2xl overflow-hidden border border-border'>
+                    <div className='bg-card w-full md:w-3/4 mx-auto rounded-2xl shadow-2xl overflow-hidden border border-border'>
                         <div className='h-[500px] w-full'>
                             <MapContainer
                                 center={[10, -60]}
