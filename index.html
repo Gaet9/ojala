@@ -7,11 +7,6 @@
         <meta name="description" content="Ojalà" />
         <meta name="author" content="Ojalà" />
 
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
         <!-- Favicon -->
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -38,6 +33,103 @@
     </head>
 
     <body>
+        <!-- Styles critiques LCP — le bundle CSS charge en différé -->
+        <style>
+            :root {
+                --background: 0 0% 100%;
+                --foreground: 220 13% 9%;
+                --primary: 245 100% 60%;
+                --primary-foreground: 0 0% 100%;
+                --primary-glow: 260 100% 70%;
+                --muted-foreground: 220 9% 46%;
+                --border: 240 6% 90%;
+                --gradient-primary: linear-gradient(135deg, hsl(245 100% 60%), hsl(260 100% 70%));
+                --shadow-glow: 0 0 60px hsl(260 100% 70% / 0.3);
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                font-family: system-ui, sans-serif;
+                background: hsl(var(--background));
+                color: hsl(var(--foreground));
+            }
+            #root {
+                min-height: 100vh;
+            }
+            .min-h-screen {
+                min-height: 100vh;
+            }
+            .flex {
+                display: flex;
+            }
+            .items-center {
+                align-items: center;
+            }
+            .justify-center {
+                justify-content: center;
+            }
+            .text-center {
+                text-align: center;
+            }
+            .mx-auto {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .w-full {
+                width: 100%;
+            }
+            .max-w-6xl {
+                max-width: 72rem;
+            }
+            .px-6 {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .py-12 {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+            .w-64 {
+                width: 16rem;
+            }
+            .h-auto {
+                height: auto;
+            }
+            .rounded-2xl {
+                border-radius: 1rem;
+            }
+            .hero-title {
+                font-size: 2.25rem;
+                line-height: 1.25;
+                font-weight: 900;
+                font-family: Georgia, "Times New Roman", serif;
+                background: var(--gradient-primary);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .hero-tagline {
+                font-size: 1.25rem;
+                line-height: 1.625;
+                font-weight: 500;
+                color: hsl(var(--muted-foreground));
+            }
+            @media (min-width: 768px) {
+                .hero-title {
+                    font-size: 3.75rem;
+                }
+                .hero-tagline {
+                    font-size: 1.5rem;
+                }
+                .md\:w-80 {
+                    width: 20rem;
+                }
+            }
+        </style>
         <div id="root"></div>
         <script type="module" src="/src/main.tsx"></script>
     </body>

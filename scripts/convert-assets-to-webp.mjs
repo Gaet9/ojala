@@ -1,7 +1,8 @@
 /**
  * Optimise les images de src/assets : redimensionnement + WebP (sharp).
  *
- * Grille / lightbox : max 1920 px (côté le plus long), ratio conservé.
+ * Grille (navigateur) : variante *-sm.webp max 800 px (côté long).
+ * Lightbox : max 1920 px (côté le plus long), ratio conservé.
  * Couverture (nom contenant "Couverture") : max 800 px de large.
  *
  * Usage:
@@ -26,8 +27,11 @@ const SOURCE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png"]);
 const WEBP_EXTENSION = ".webp";
 
 const DEFAULT_QUALITY = 80;
-/** Grille + lightbox (retina ~2× sur grand écran) */
+/** Lightbox (retina ~2×, max-w-4xl) */
 const DEFAULT_GALLERY_MAX = 1920;
+/** Vignettes galerie (tuiles ~400–580 px affiché × 2) */
+const DEFAULT_GALLERY_THUMB_MAX = 960;
+const THUMB_SUFFIX = "-sm";
 /** Hero : w-80 ≈ 320 px → 800 px en 2×+ marge */
 const DEFAULT_COVER_MAX_WIDTH = 800;
 const COVER_NAME_PATTERN = /couverture/i;
@@ -39,6 +43,7 @@ function parseArgs() {
     let webpOnly = false;
     let force = false;
     let galleryMax = DEFAULT_GALLERY_MAX;
+    let galleryThumbMax = DEFAULT_GALLERY_THUMB_MAX;
     let coverMaxWidth = DEFAULT_COVER_MAX_WIDTH;
     let staging = false;
     let applyStaging = false;
@@ -48,6 +53,8 @@ function parseArgs() {
             quality = Math.min(100, Math.max(1, parseInt(arg.split("=")[1], 10) || DEFAULT_QUALITY));
         } else if (arg.startsWith("--gallery-max=")) {
             galleryMax = Math.max(1, parseInt(arg.split("=")[1], 10) || DEFAULT_GALLERY_MAX);
+        } else if (arg.startsWith("--thumb-max=")) {
+            galleryThumbMax = Math.max(1, parseInt(arg.split("=")[1], 10) || DEFAULT_GALLERY_THUMB_MAX);
         } else if (arg.startsWith("--cover-max=")) {
             coverMaxWidth = Math.max(1, parseInt(arg.split("=")[1], 10) || DEFAULT_COVER_MAX_WIDTH);
         } else if (arg === "--delete-originals") {
@@ -68,7 +75,8 @@ Redimensionne puis encode en WebP (ou ré-optimise des .webp existants).
 
 Options:
   --quality=N           Qualité WebP (1-100, défaut: ${DEFAULT_QUALITY})
-  --gallery-max=N       Côté max galerie/lightbox (défaut: ${DEFAULT_GALLERY_MAX})
+  --gallery-max=N       Côté max lightbox (défaut: ${DEFAULT_GALLERY_MAX})
+  --thumb-max=N         Côté max vignettes *-sm.webp (défaut: ${DEFAULT_GALLERY_THUMB_MAX})
   --cover-max=N         Largeur max couverture (défaut: ${DEFAULT_COVER_MAX_WIDTH})
   --webp-only           Traite uniquement les .webp (écrase avec --force)
   --force               Réécrit les .webp même s'ils existent déjà
@@ -85,7 +93,24 @@ Workflow Windows :
         }
     }
 
-    return { quality, deleteOriginals, webpOnly, force, galleryMax, coverMaxWidth, staging, applyStaging };
+    return { quality, deleteOriginals, webpOnly, force, galleryMax, galleryThumbMax, coverMaxWidth, staging, applyStaging };
+}
+
+function isThumbVariant(filePath) {
+    return path.basename(filePath).includes(`${THUMB_SUFFIX}.webp`);
+}
+
+function getThumbOutputPath(webpPath) {
+    return webpPath.slice(0, -WEBP_EXTENSION.length) + `${THUMB_SUFFIX}${WEBP_EXTENSION}`;
+}
+
+function getThumbResizeOptions(galleryThumbMax) {
+    return {
+        width: galleryThumbMax,
+        height: galleryThumbMax,
+        fit: "inside",
+        withoutEnlargement: true,
+    };
 }
 
 function formatBytes(bytes) {
@@ -136,7 +161,7 @@ async function collectFiles(dir, webpOnly, files = []) {
             await collectFiles(fullPath, webpOnly, files);
         } else if (entry.isFile()) {
             const ext = path.extname(entry.name).toLowerCase();
-            if (webpOnly && ext === WEBP_EXTENSION) {
+            if (webpOnly && ext === WEBP_EXTENSION && !isThumbVariant(fullPath)) {
                 files.push(fullPath);
             } else if (!webpOnly && SOURCE_EXTENSIONS.has(ext)) {
                 files.push(fullPath);
@@ -187,8 +212,32 @@ function buildSharpPipeline(inputPath, galleryMax, coverMaxWidth, quality) {
     return sharp(inputPath).resize(resize).webp({ quality });
 }
 
+async function encodeThumbWebpBuffer(inputPath, inputBuffer, galleryThumbMax, quality) {
+    const resize = getThumbResizeOptions(galleryThumbMax);
+    return sharp(inputBuffer).resize(resize).webp({ quality }).toBuffer();
+}
+
+async function writeGalleryThumb(filePath, inputBuffer, options) {
+    if (isCoverImage(filePath) || isThumbVariant(filePath)) {
+        return null;
+    }
+
+    const { quality, galleryThumbMax, staging } = options;
+    let thumbPath = getThumbOutputPath(filePath);
+    if (staging) {
+        const rel = path.relative(ASSETS_DIR, thumbPath);
+        thumbPath = path.join(STAGING_DIR, rel);
+        await fs.mkdir(path.dirname(thumbPath), { recursive: true });
+    }
+
+    const buffer = await encodeThumbWebpBuffer(filePath, inputBuffer, galleryThumbMax, quality);
+    await fs.writeFile(thumbPath, buffer);
+    return thumbPath;
+}
+
 async function processSourceFile(filePath, options) {
     const { quality, deleteOriginals, force, galleryMax, coverMaxWidth } = options;
+    const inputBuffer = await fs.readFile(filePath);
     const ext = path.extname(filePath);
     const webpPath = filePath.slice(0, -ext.length) + WEBP_EXTENSION;
 
@@ -198,8 +247,9 @@ async function processSourceFile(filePath, options) {
 
     const existingWebp = await fs.stat(webpPath).catch(() => null);
     if (existingWebp && force) {
-        const buffer = await encodeToWebpBuffer(filePath, galleryMax, coverMaxWidth, quality);
+        const buffer = await encodeToWebpBuffer(filePath, galleryMax, coverMaxWidth, quality, inputBuffer);
         await writeWebpOutput(webpPath, buffer);
+        await writeGalleryThumb(filePath, inputBuffer, options);
         const webpStat = await fs.stat(webpPath);
         const dimsAfter = await getImageDimensions(webpPath);
         let deleted = false;
@@ -235,6 +285,7 @@ async function processSourceFile(filePath, options) {
     }
 
     await buildSharpPipeline(filePath, galleryMax, coverMaxWidth, quality).toFile(webpPath);
+    await writeGalleryThumb(filePath, inputBuffer, options);
 
     const webpStat = await fs.stat(webpPath);
     const dimsAfter = await getImageDimensions(webpPath);
@@ -276,6 +327,8 @@ async function processWebpInPlace(filePath, options) {
     } else {
         await writeWebpOutput(filePath, outputBuffer);
     }
+
+    await writeGalleryThumb(filePath, inputBuffer, options);
 
     const outputStat = await fs.stat(outputPath);
     const dimsAfter = await getImageDimensions(outputPath);
@@ -348,7 +401,8 @@ async function runApplyStaging() {
 
 async function main() {
     const options = parseArgs();
-    const { quality, deleteOriginals, webpOnly, force, galleryMax, coverMaxWidth, staging, applyStaging } = options;
+    const { quality, deleteOriginals, webpOnly, force, galleryMax, galleryThumbMax, coverMaxWidth, staging, applyStaging } =
+        options;
 
     if (applyStaging) {
         await runApplyStaging();
@@ -359,7 +413,8 @@ async function main() {
     console.log(`Mode: ${webpOnly ? "WebP uniquement (ré-écriture)" : "jpg/png → WebP"}`);
     if (staging) console.log(`Sortie: ${STAGING_DIR} (puis npm run optimize:images:apply)`);
     console.log(`Qualité WebP: ${quality}`);
-    console.log(`Galerie / lightbox: max ${galleryMax} px (côté long, fit inside)`);
+    console.log(`Lightbox: max ${galleryMax} px (côté long, fit inside)`);
+    console.log(`Vignettes galerie (*-sm.webp): max ${galleryThumbMax} px`);
     console.log(`Couverture (*Couverture*): max ${coverMaxWidth} px de large`);
     if (force) console.log(`Force: oui`);
     if (deleteOriginals && !webpOnly) console.log(`Suppression des originaux: oui`);
@@ -434,7 +489,7 @@ async function main() {
     console.log(`  Optimisés             : ${processed}`);
     console.log(`  Ignorés               : ${skipped}`);
     if (errors > 0) console.log(`  Erreurs               : ${errors}`);
-    console.log(`  Galerie / lightbox    : ${galleryCount} (max ${galleryMax}px)`);
+    console.log(`  Galerie / lightbox    : ${galleryCount} (lightbox ${galleryMax}px, vignettes ${galleryThumbMax}px)`);
     console.log(`  Couverture            : ${coverCount} (max ${coverMaxWidth}px large)`);
     console.log(`  Taille avant          : ${formatBytes(totalBefore)}`);
     console.log(`  Taille après          : ${formatBytes(totalAfter)}`);

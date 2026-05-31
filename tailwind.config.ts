@@ -3,7 +3,18 @@ import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
     darkMode: ["class"],
-    content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+    // Ne scanner que les composants réellement utilisés (évite ~100 Ko de CSS shadcn inutile)
+    content: [
+        "./index.html",
+        "./src/**/*.{ts,tsx}",
+        "!./src/components/ui/**/*.{ts,tsx}",
+        "./src/components/ui/button.tsx",
+        "./src/components/ui/dropdown-menu.tsx",
+        "./src/components/ui/mode-toggle.tsx",
+        "./src/components/ui/language-toggle.tsx",
+        "./src/components/ui/theme-provider.tsx",
+    ],
+    safelist: ["animate-in"],
     prefix: "",
     theme: {
         container: {
@@ -76,7 +87,7 @@ export default {
                 bounce: "var(--transition-bounce)",
             },
             fontFamily: {
-                sans: ["Inter", "system-ui", "sans-serif"],
+                sans: ["Inter Variable", "Inter", "system-ui", "sans-serif"],
             },
             borderRadius: {
                 lg: "var(--radius)",

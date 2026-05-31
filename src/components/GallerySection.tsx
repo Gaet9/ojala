@@ -3,10 +3,22 @@ import { useTranslation } from "react-i18next";
 import getPhotoMeta from "./photoMeta";
 import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 // Dynamically import all images from assets/Photos (WebP)
+const isGalleryPhotoPath = (path: string) => !path.includes("-sm.webp");
+
 const imageEntries = [
     ...Object.entries(import.meta.glob("../assets/Photos/Photo_article*.webp", { eager: true, as: "url" })),
     ...Object.entries(import.meta.glob("../assets/Photos/photo_article*.webp", { eager: true, as: "url" })),
-];
+].filter(([path]) => isGalleryPhotoPath(path));
+
+const thumbUrlByFilename = new Map<string, string>();
+for (const [path, url] of [
+    ...Object.entries(import.meta.glob("../assets/Photos/Photo_article*-sm.webp", { eager: true, as: "url" })),
+    ...Object.entries(import.meta.glob("../assets/Photos/photo_article*-sm.webp", { eager: true, as: "url" })),
+]) {
+    const fullName = path.split("/").pop() || path;
+    const baseName = fullName.replace(/-sm\.webp$/i, ".webp");
+    thumbUrlByFilename.set(baseName, url);
+}
 
 // Sort by the number in Photo_articleX.webp and keep filename
 const sortedImages = imageEntries
@@ -44,8 +56,10 @@ const GallerySection = () => {
     const galleryItems = sortedImages.map((img, idx) => {
         // Use filename as key for metadata lookup
         const meta = getPhotoMeta(img.filename);
+        const thumbSrc = thumbUrlByFilename.get(img.filename) ?? img.url;
         return {
             src: img.url,
+            thumbSrc,
             caption: meta && meta.caption ? meta.caption : `Photo ${idx + 1}`,
             alt: meta && meta.alt ? meta.alt : `Photo ${idx + 1}`,
         };
@@ -250,7 +264,13 @@ const GallerySection = () => {
                                     className={`gallery-item ${sizeClass} fade-in group transform-gpu ease-out hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 relative will-change-transform`}
                                     onClick={() => openLightbox(globalIndex)}>
                                     <div className={`relative overflow-hidden ${aspectClass} w-full h-full`}>
-                                        <img src={item.src} alt={item.alt} className='w-full h-full object-cover' />
+                                        <img
+                                            src={item.thumbSrc}
+                                            alt={item.alt}
+                                            className='w-full h-full object-cover'
+                                            loading='lazy'
+                                            decoding='async'
+                                        />
                                         <div className='absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
                                             <ZoomIn className='w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
                                         </div>
@@ -325,6 +345,7 @@ const GallerySection = () => {
                                     src={galleryItems[selectedImage].src}
                                     alt={galleryItems[selectedImage].alt}
                                     className='max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl mx-auto'
+                                    decoding='async'
                                 />
                                 <div className='mt-4 text-center'>
                                     <p className='text-white/80 text-lg'>{galleryItems[selectedImage].caption}</p>

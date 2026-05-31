@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { MapPin, Info, Search, Clock, Gauge } from "lucide-react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "flag-icons/css/flag-icons.min.css";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import { useTheme } from "@/components/ui/use-theme";
 import tripData from "../data/trip.json";

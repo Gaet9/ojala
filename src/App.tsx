@@ -1,34 +1,26 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
+import { lazy, Suspense } from "react";
 import { ThemeProvider } from "@/components/ui/theme-provider.tsx";
 import BookLanding from "./pages/BookLanding";
-import NotFound from "./pages/NotFound";
+import DeferredAnalytics from "@/components/DeferredAnalytics";
 
-const queryClient = new QueryClient();
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+const isHomePage = () => {
+    const path = window.location.pathname.replace(/\/+$/, "") || "/";
+    return path === "/";
+};
 
 const App = () => (
-    <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-            <ThemeProvider>
-                <Toaster />
-                <Sonner />
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='/' element={<BookLanding />} />
-                        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                        <Route path='*' element={<NotFound />} />
-                    </Routes>
-                    <Analytics />
-                    <SpeedInsights />
-                </BrowserRouter>
-            </ThemeProvider>
-        </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+        {isHomePage() ? (
+            <BookLanding />
+        ) : (
+            <Suspense fallback={null}>
+                <NotFound />
+            </Suspense>
+        )}
+        <DeferredAnalytics />
+    </ThemeProvider>
 );
 
 export default App;

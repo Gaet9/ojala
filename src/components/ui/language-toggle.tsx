@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useTranslation } from "react-i18next";
+import { loadLanguage, type SupportedLanguage } from "@/i18n";
 
 const FlagFR = () => (
     <svg width='18' height='12' viewBox='0 0 3 2' aria-hidden>
@@ -44,8 +45,14 @@ const LANGUAGE_OPTIONS: Array<{ code: "en" | "es" | "fr"; label: string; Icon: (
 export function LanguageToggle() {
     const { i18n } = useTranslation();
 
-    const changeLanguage = (lng: "en" | "es" | "fr") => {
-        i18n.changeLanguage(lng);
+    const changeLanguage = async (lng: SupportedLanguage) => {
+        await loadLanguage(lng);
+        await i18n.changeLanguage(lng);
+        try {
+            localStorage.setItem("i18nextLng", lng);
+        } catch {
+            // localStorage unavailable
+        }
     };
 
     const currentCode: "en" | "es" | "fr" = i18n.language.startsWith("fr") ? "fr" : i18n.language.startsWith("es") ? "es" : "en";

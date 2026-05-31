@@ -1,6 +1,14 @@
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import { initI18n } from "./i18n";
 import "./index.css";
-import "./i18n";
 
-createRoot(document.getElementById("root")!).render(<App />);
+if (import.meta.env.DEV) {
+    void import("./fonts.css");
+}
+
+const root = createRoot(document.getElementById("root")!);
+
+initI18n().then(async () => {
+    const { default: App } = await import("./App.tsx");
+    root.render(<App />);
+});

@@ -1,0 +1,4 @@
+/* Polices auto-hébergées — chargées en différé via main.tsx (hors chemin critique) */
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource/cinzel/latin-ext-900.css";
+@import "@fontsource/cinzel/latin-900.css";
